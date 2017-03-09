@@ -46,5 +46,8 @@ Contributor(s):
     <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/vks_service?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">vksservice</property>
     <property name="hibernate.connection.password">vksservice</property>
+    <property name="hibernate.hbm2ddl.auto">update</property>
+    <property name="hibernate.show_sql">true</property>
+    <mapping resource="hibernate.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

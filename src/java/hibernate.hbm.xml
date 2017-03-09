@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.vksservice.Bean.ServiceBean" table="service_tb">
+        <id name="serviceNo" type="int" column="serviceNo">
+            <generator class="increment" />
+        </id>
+        <property name="inDate" column="inDate" type="date"/>
+        <property name="outDate" column="outDate" type="date"/>
+        <property name="companyName" column="companyName" type="string"/>
+        <property name="companyAddress" column="companyAddress" type="string"/>
+        <property name="receivedBy" column="receivedBy" type="string"/>
+        <property name="attendedBy" column="attendedBy" type="string"/>
+        <property name="statusOfService" column="statusOfService" type="string"/>
+        <property name="busDetails" column="busDetails" type="string"/>
+        <property name="courierNo" column="courierNo" type="string"/>
+        <list name="boardBean" cascade="all" lazy="false">
+            <key column="serviceNo" />
+            <index column="type"/>
+            <one-to-many class="com.vksservice.Bean.BoardBean"/>
+        </list>
+    </class>
+    <class name="com.vksservice.Bean.BoardBean" table="board_tb">
+        <id name="id" type="int" column="id">
+            <generator class="increment"/>
+        </id>
+        <property name="boardSNo" column="boardSNo" type="string" not-null="true"/>   
+        <property name="boardName" column="boardName" type="string"/>
+        <property name="problem" column="problem" type="string"/>
+        <property name="remedy" column="remedy" type="string"/>
+        <property name="statusOfBoard" column="statusOfBoard" type="string"/>
+        <list name="imageBean" table="com.vksservice.Bean.ImageBean" cascade="all" lazy="false">
+            <key column="boardSNo" />
+            <index column="type"/>
+            <one-to-many class="com.vksservice.Bean.ImageBean"/>
+        </list> 
+    </class>
+    <class name="com.vksservice.Bean.ImageBean" table="image_tb">
+        <id name="id" type="int" column="id">
+            <generator class="increment"/>
+        </id>
+        <property name="boardImage" column="boardImage" type="blob"/>
+    </class>
+    <class name="com.vksservice.Bean.DCBean" table="dc_tb">
+        <id name="dcNo" type="int" column="dcNo">
+            <generator class="increment"></generator>
+        </id>
+        <property name="serviceNo" type="int" column="serviceNo"></property>
+        <property name="dcDate" type="date" column="dcDate"></property>
+        <property name="companyName" type="string" column="companyName"></property>
+        <property name="companyAddress" type="string" column="companyAddress"></property>
+    </class>
+    <class name="com.vksservice.Bean.BillBean" table="bill_tb">
+        <id name="billNo" type="int" column="billNo">
+            <generator class="increment"/>
+        </id>
+        <property name="serviceNo" column="serviceNo" type="int" />
+        <property name="billDate" column="billDate" type="date" />
+        <property name="companyName" column="companyName" type="string" />
+        <property name="companyAddress" column="companyAddress" type="string" />
+        <property name="courierNo" column="courierNo" type="string" /> 
+        <property name="amount" column="amount" type="float" />
+    </class>
+    <class name="com.vksservice.Bean.StockBean" table="stock_tb">
+        <id name="id" type="int" column="id">
+            <generator class="increment"/>
+        </id>
+        <property name="spareName" column="spareName" type="string" />
+        <property name="spareNo" column="spareNo" type="string" />
+        <property name="quantity" column="quantity" type="int" />
+    </class>
+</hibernate-mapping>
